@@ -8,13 +8,13 @@ The manuscript is written in Quarto Markdown (`.qmd`) and formats into a Microso
 
 ## Quick Access for Readers
 
-If you only want to read the paper, you do not need to install any coding tools, R packages, or command-line utilities.
+The manuscript is maintained as a reproducible Quarto document (`TranQuocHoang_IM25_Newsletter.qmd`), accompanied by bibliography files and figure assets.
 
-| File | Description | Recommended For |
+| Access Method | Description | Target Format |
 |:---|:---|:---|
-| `final_25AU IM Group Trần Quốc Hoàng (just me).docx` | Final compiled manuscript with figures, formatted tables, and numbered references. | Reading, grading, reviewing, or sharing via Microsoft Word, LibreOffice, or Google Docs. |
-| `old_before_format_change_25AU IM Group Trần Quốc Hoàng (just me).docx` | Archived earlier draft prior to style adjustments. | Reference and version comparison. |
-| `TranQuocHoang_IM25_Newsletter.qmd` | Raw Quarto source file containing text, academic metadata, and code chunk headers. | Editing, compiling from source, or examining reproducible formatting. |
+| **Render in RStudio** | Open the project in RStudio and click **Render** to compile the formatted manuscript in one click. | Word document (`TranQuocHoang_IM25_Newsletter.docx`) |
+| **Command-Line Render** | Run `quarto render TranQuocHoang_IM25_Newsletter.qmd` from your terminal. | Word document (`TranQuocHoang_IM25_Newsletter.docx`) |
+| **Read Source Markdown** | Open `TranQuocHoang_IM25_Newsletter.qmd` in any text editor, Obsidian, or GitHub for immediate reading. | Plain-text Markdown (`.qmd`) |
 
 ---
 
@@ -77,7 +77,7 @@ flowchart TD
 | `_extensions/` | Bundled Quarto template | Contains the locally vendored Hikmah Academic Word manuscript extension. |
 | `renv.lock` | R dependency manifest | Specifies exact versions of R packages needed for reproducible rendering. |
 | `renv/` | R environment bootstrap | Scripts to activate and manage the isolated R library. |
-| `final_25AU IM Group Trần Quốc Hoàng (just me).docx` | Pre-rendered Word manuscript | Ready-to-read final output. |
+| `TranQuocHoang_IM25_Newsletter.docx` | Generated Word manuscript | Compiled output generated upon running `quarto render`. |
 
 ---
 
