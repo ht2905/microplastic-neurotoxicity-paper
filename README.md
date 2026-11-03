@@ -1,20 +1,20 @@
 # Micro- and Nanoplastics: Crossing the Blood-Brain Barrier to Drive Sustained Neuroinflammation and HPA Axis Dysregulation
 
-This repository hosts the manuscript source, bibliography, visual assets, and rendering configuration for an academic review on the neurotoxic and endocrine effects of environmental micro- and nanoplastics (MNPs). The paper was prepared for the Immunology course (BT335IU) at the School of Biotechnology, International University – Vietnam National University, Ho Chi Minh City.
+This repository hosts the manuscript source, bibliography database, visual figures, and publishing configuration for an academic review on the neurotoxic and endocrine effects of environmental micro- and nanoplastics (MNPs). The paper was prepared for the Immunology course (BT335IU) at the School of Biotechnology, International University – Vietnam National University, Ho Chi Minh City.
 
-The manuscript is written in Quarto Markdown (`.qmd`) and formats into a Microsoft Word (`.docx`) document using a locally bundled Hikmah Academic manuscript template and Elsevier Vancouver citation styling.
+The manuscript is authored in Quarto Markdown (`microplastic-neurotoxicity_manuscript.qmd`) and compiles to Microsoft Word (`.docx`) using a locally vendored Hikmah Academic manuscript template and Elsevier Vancouver citation formatting.
 
 ---
 
 ## Quick Access for Readers
 
-The manuscript is maintained as a reproducible Quarto document (`TranQuocHoang_IM25_Newsletter.qmd`), accompanied by bibliography files and figure assets.
+The manuscript can be read in plain-text directly on GitHub, downloaded as a pre-compiled document via GitHub Actions artifacts, or compiled locally with a single command.
 
 | Access Method | Description | Target Format |
 |:---|:---|:---|
-| **Render in RStudio** | Open the project in RStudio and click **Render** to compile the formatted manuscript in one click. | Word document (`TranQuocHoang_IM25_Newsletter.docx`) |
-| **Command-Line Render** | Run `quarto render TranQuocHoang_IM25_Newsletter.qmd` from your terminal. | Word document (`TranQuocHoang_IM25_Newsletter.docx`) |
-| **Read Source Markdown** | Open `TranQuocHoang_IM25_Newsletter.qmd` in any text editor, Obsidian, or GitHub for immediate reading. | Plain-text Markdown (`.qmd`) |
+| **Direct Download (GitHub Actions)** | Download the latest compiled Word document directly from the repository's GitHub Actions build artifacts. | Word document (`.docx`) |
+| **Local Render (1-Command)** | Run `quarto render microplastic-neurotoxicity_manuscript.qmd` on your machine. | Word document (`.docx`) |
+| **Read Source Markdown** | Open `microplastic-neurotoxicity_manuscript.qmd` in any text editor, Obsidian, or directly in GitHub. | Plain-text Markdown (`.qmd`) |
 
 ---
 
@@ -68,91 +68,56 @@ flowchart TD
 
 | File or Folder | Purpose | Notes |
 |:---|:---|:---|
-| `TranQuocHoang_IM25_Newsletter.qmd` | Main manuscript source file | Written in Quarto Markdown; contains YAML metadata and text sections. |
-| `bibliography.bib` | Reference database | BibTeX file holding all literature citations. |
-| `elsevier-vancouver.csl` | Citation stylesheet | Formats references according to Elsevier Vancouver specifications. |
-| `elsevier-vancouver-short-author-list.csl` | Alternative citation style | Formatted variant with truncated author lists. |
-| `vancouver.csl` | Standard Vancouver stylesheet | Standard numerical biomedical citation style. |
-| `photos/` | Image and diagram directory | Contains mechanistic illustrations referenced in the paper. |
-| `_extensions/` | Bundled Quarto template | Contains the locally vendored Hikmah Academic Word manuscript extension. |
-| `renv.lock` | R dependency manifest | Specifies exact versions of R packages needed for reproducible rendering. |
-| `renv/` | R environment bootstrap | Scripts to activate and manage the isolated R library. |
-| `TranQuocHoang_IM25_Newsletter.docx` | Generated Word manuscript | Compiled output generated upon running `quarto render`. |
+| `microplastic-neurotoxicity_manuscript.qmd` | Main manuscript source file | Self-contained Quarto Markdown file containing text, academic metadata, and figure references. |
+| `bibliography.bib` | Reference database | BibTeX file containing all cited literature entries. |
+| `csl/elsevier-vancouver.csl` | Citation stylesheet | Formats references according to Elsevier Vancouver specifications. |
+| `figures/` | Visual figure assets | High-resolution diagrams illustrating BBB crossing, microglial activation, and HPA axis disruption. |
+| `_extensions/andrewheiss/hikmah-manuscript/` | Bundled Quarto template | Locally vendored Hikmah Academic Word manuscript styling extension. |
+| `_quarto.yml` | Project configuration | Defines project-level render targets and default formatting. |
+| `.github/workflows/render-manuscript.yml` | Continuous integration | Automated GitHub Action that compiles the manuscript on push. |
 
 ---
 
 ## Reproducing or Editing the Document
 
-For wet-lab researchers who wish to modify the text, update citations, or regenerate the `.docx` document from the source file, follow the instructions below.
+The repository is optimized for zero-dependency native Quarto compilation. Because the manuscript contains no embedded computational code chunks or statistical simulations, **no R, Python, or package manager installation is required.**
 
 ### Prerequisites
 
 | Tool | Recommended Version | Purpose | Download |
 |:---|:---|:---|:---|
-| R | 4.0 or newer | R runtime environment | [cran.r-project.org](https://cran.r-project.org/) |
-| RStudio Desktop | Latest stable release | Graphical interface for editing and rendering | [posit.co/download/rstudio-desktop](https://posit.co/download/rstudio-desktop/) |
 | Quarto CLI | 1.3 or newer | Scientific publishing engine | [quarto.org/docs/get-started](https://quarto.org/docs/get-started/) |
-| Microsoft Word or LibreOffice | Any modern release | Viewing and reviewing the rendered `.docx` | [libreoffice.org](https://www.libreoffice.org/) |
+| Microsoft Word or LibreOffice | Any modern release | Reviewing and viewing the compiled `.docx` | [libreoffice.org](https://www.libreoffice.org/) |
+| Git (Optional) | Any modern release | Cloning the repository | [git-scm.com](https://git-scm.com/) |
 
 > [!NOTE]
-> You do **not** need to install LaTeX, MacTeX, or MikTeX to compile this manuscript because the output target is a Microsoft Word document (`.docx`).
+> You do **not** need R, RStudio, `renv`, or a LaTeX distribution (such as MacTeX or MikTeX) to compile this paper. Quarto compiles the `.qmd` source directly to `.docx` via its embedded Pandoc engine.
 
 ---
 
-### Method 1: Using RStudio (Recommended for Lab Members)
-
-This method provides a graphical interface and is the most straightforward approach if you are accustomed to working in RStudio.
+### Step-by-Step Local Compilation
 
 1. **Clone or Download the Repository**
-    * Download the repository as a ZIP archive and extract it, or clone the repository via Git:
+    * Clone via Git:
       ```bash
       git clone https://github.com/ht2905/microplastic-neurotoxicity-paper.git
+      cd microplastic-neurotoxicity-paper
       ```
+    * Alternatively, download and extract the repository ZIP from GitHub.
 
-2. **Open the Project in RStudio**
-    * Launch RStudio.
-    * In the top-right menu, select **File > Open Project...** and choose the downloaded repository directory (or open RStudio directly inside this directory).
-
-3. **Restore R Packages via `renv`**
-    * The project uses `renv` to guarantee package version compatibility.
-    * In the RStudio **Console** tab, run:
-      ```r
-      renv::restore()
+2. **Render the Manuscript**
+    * Open your terminal in the repository folder and run:
+      ```bash
+      quarto render
       ```
-    * When prompted with `Do you want to proceed? [y/N]`, type `y` and press Enter. R will automatically install the exact versions of the rendering libraries (`knitr`, `rmarkdown`, `yaml`, `ragg`).
+    * Or specify the manuscript file directly:
+      ```bash
+      quarto render microplastic-neurotoxicity_manuscript.qmd
+      ```
+    * Quarto will process the markdown text, resolve the citations against `bibliography.bib`, apply the CSL style, and generate `microplastic-neurotoxicity_manuscript.docx`.
 
-4. **Open and Render the Manuscript**
-    * In the **Files** pane (bottom-right of RStudio), click on `TranQuocHoang_IM25_Newsletter.qmd` to open it in the editor.
-    * Click the **Render** button (blue arrow icon) at the top of the editor pane, or press `Ctrl+Shift+K` (Windows/Linux) or `Cmd+Shift+K` (macOS).
-    * Quarto will process the markdown, cross-reference figures, format the citations according to `elsevier-vancouver.csl`, and generate `TranQuocHoang_IM25_Newsletter.docx`.
-
----
-
-### Method 2: Using the Command Line (Terminal)
-
-If you prefer working directly in a shell environment:
-
-1. **Navigate to the Project Root**
-    ```bash
-    cd microplastic-neurotoxicity-paper
-    ```
-
-2. **Install or Restore R Dependencies**
-    ```bash
-    Rscript -e "renv::restore()"
-    ```
-
-3. **Verify Quarto Installation**
-    ```bash
-    quarto check install
-    ```
-
-4. **Render the Document to Word**
-    ```bash
-    quarto render TranQuocHoang_IM25_Newsletter.qmd
-    ```
-
-    The generated document will be saved in the root folder as `TranQuocHoang_IM25_Newsletter.docx`.
+3. **Rendering within RStudio or VS Code (GUI Option)**
+    * If you prefer using RStudio or VS Code, simply open `microplastic-neurotoxicity_manuscript.qmd` and click the **Render** button in the top toolbar.
 
 ---
 
@@ -160,11 +125,10 @@ If you prefer working directly in a shell environment:
 
 | Issue | Cause | Solution |
 |:---|:---|:---|
-| `quarto: command not found` | Quarto CLI is not installed or not added to your system PATH. | Download and run the Quarto installer from [quarto.org](https://quarto.org/docs/get-started/). Restart RStudio or your terminal after installing. |
-| `renv::restore()` fails on binary download | Network restriction or outdated R repository mirror. | Run `options(repos = c(CRAN = "https://cloud.r-project.org"))` in the R console, then re-run `renv::restore()`. |
-| Missing Quarto extensions error | Quarto template not detected. | Ensure the `_extensions/` folder is present in the repository root. This project already bundles the template locally; you do not need to install it from GitHub. |
-| Permission error when opening `.docx` after render | The Word document is currently open in Microsoft Word. | Close Microsoft Word before running the render command so that Quarto can overwrite the output file. |
-| Figures fail to appear in the output | Changed image paths or missing files. | Verify that the image files remain inside the `photos/` directory with their original filenames (`entry-routes.jpeg`, `gut-brain-axis.jpg`, etc.). |
+| `quarto: command not found` | Quarto CLI is not installed or not added to your system PATH. | Download and run the Quarto installer from [quarto.org](https://quarto.org/docs/get-started/). Restart your terminal or editor after installing. |
+| Permission error when running `quarto render` | The generated `.docx` file is currently open in Microsoft Word. | Close Microsoft Word before running the render command so that the output file can be overwritten. |
+| Figures fail to render in document | Image path mismatch or missing figure assets. | Confirm that the figure files exist in `figures/` with their expected names (`mnp_entry-routes.jpeg`, `microglia_activation-states.jpg`, etc.). |
+| Extension not recognized | Rendering from a subfolder rather than root. | Always run `quarto render` from the root directory of the repository where `_extensions/` and `_quarto.yml` reside. |
 
 ---
 
