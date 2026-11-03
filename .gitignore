@@ -1,92 +1,45 @@
 # ----------------------------------------------------------------------------
-# RStudio & R Environment
+# Editor & OS Files
 # ----------------------------------------------------------------------------
-
-# RStudio Project and Session Files
-.Rproj.user/ # User-specific data and temporary files
-.RData # R image file
-.RDataTmp # Temporary R image file
-.Ruserdata # R user data
-*.Rproj # RStudio project file
-
-# R console/history files (Consolen-/Verlaufsdateien)
+.Rproj.user/
+.RData
+.RDataTmp
+.Ruserdata
+*.Rproj
 .Rhistory
-# .Rprofile # User profile/startup file (often tracked, so commented/disabled in this case)
-/renv/ # Ignore the renv folder itself, but include exceptions below
-
-# renv exceptions: keep these tracked for environment reproducibility
-!/renv/activate.R
-!/renv/settings.json
-!renv.lock
-# You should also keep the renv/.gitignore file unless you delete renv/
+Thumbs.db
+.DS_Store
+*.log
 
 # ----------------------------------------------------------------------------
-# Quarto / Knitr Build Artifacts & Outputs
+# Quarto / Pandoc Build Artifacts & Outputs
 # ----------------------------------------------------------------------------
+.quarto/
+/.quarto/
+*_files/
+*_cache/
+cache/
+_freeze/
+build/
+dist/
 
-# Quarto and Knitr intermediate and cache files (Zwischen- und Cache-Dateien)
-.quarto/ # Quarto cache folder
-*_files/ # Knitr/R Markdown file dependencies (e.g., figure folders)
-*_cache/ # Knitr cache folder
-cache/ # General cache folder (if you use this naming)
-_freeze # Build artifact, mainly used in incremental rendering
-
-# Quarto extensions
-!_extensions/ # because this project uses a slightly modified template
-
-# Intermediate Quarto/R Markdown files
+# Intermediate files
 *.utf8.md
 *.knit.md
 
-# LaTeX/PDF compilation temporary files
-**/*.fff** # **Temporary LaTeX figure/float file (the one you asked about)**
-**/*.aux** # LaTeX auxiliary file
-**/*.bbl** # BibTeX generated bibliography file
-**/*.blg** # BibTeX log file
-**/*.log** # LaTeX log file
-**/*.nav** # LaTeX navigation file
-**/*.out** # LaTeX output file
-**/*.snm** # LaTeX file for Beamer (presentations)
-**/*.toc** # LaTeX table of contents file
-**/*.synctex.gz** # SyncTeX file for editor synchronization
-
-# Package build and testing artifacts
-*.tar.gz # R package tarball
-*.Rcheck/ # R package check directory
-
-# ----------------------------------------------------------------------------
-# Common System Files & Project-Specific Exclusions
-# ----------------------------------------------------------------------------
-
-# Identifiable Info (User-Defined)
-lab_photo.png
-
-# Windows/macOS/Linux system files (Systemdateien)
-Thumbs.db # Windows thumbnail cache
-.DS_Store # macOS directory service file
-*.log # General log files (already included some specific ones above, but this is a general catch-all)
-
-# Data and credentials (Uncomment if needed)
-# data/
-# .env
-# *.secrets
-# *.key
-
-# Rendered documents (Uncomment if you decide to ignore outputs)
+# Rendered output documents
+*.docx
 *.html
 *.pdf
-# *.docx
 *.tex
 
-# Specific document to ignore
-TranQuocHoang_IM25_Newsletter.docx
-.Rproj.user
+# Bundled Quarto template exception
+!_extensions/
 
-/.quarto/
-
-# Local hygiene directories
+# ----------------------------------------------------------------------------
+# Hygiene & Local Directories
+# ----------------------------------------------------------------------------
 temp/
 logs/
 artifacts/
 .venv/
-
