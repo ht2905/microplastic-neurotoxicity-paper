@@ -83,3 +83,10 @@ TranQuocHoang_IM25_Newsletter.docx
 .Rproj.user
 
 /.quarto/
+
+# Local hygiene directories
+temp/
+logs/
+artifacts/
+.venv/
+
