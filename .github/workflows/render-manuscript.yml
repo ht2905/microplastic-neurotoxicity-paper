@@ -31,15 +31,34 @@ jobs:
         run: quarto render microplastic-neurotoxicity_manuscript.qmd --to hikmah-manuscript-docx
 
       - name: Render Manuscript to Standalone HTML
-        run: quarto render microplastic-neurotoxicity_manuscript.qmd --to html --output index.html
+        run: |
+          quarto render microplastic-neurotoxicity_manuscript.qmd --to html --output index.html
+          cp index.html microplastic-neurotoxicity_manuscript.html
+
+      - name: Build Replication Package
+        run: |
+          mkdir -p package/microplastic-neurotoxicity-paper
+          cp microplastic-neurotoxicity_manuscript.docx package/microplastic-neurotoxicity-paper/
+          cp microplastic-neurotoxicity_manuscript.html package/microplastic-neurotoxicity-paper/
+          cp microplastic-neurotoxicity_manuscript.qmd package/microplastic-neurotoxicity-paper/
+          cp bibliography.bib package/microplastic-neurotoxicity-paper/
+          cp _quarto.yml package/microplastic-neurotoxicity-paper/
+          cp README.md package/microplastic-neurotoxicity-paper/
+          cp -r csl package/microplastic-neurotoxicity-paper/
+          cp -r figures package/microplastic-neurotoxicity-paper/
+          cp -r _extensions package/microplastic-neurotoxicity-paper/
+          cd package && zip -r ../microplastic-neurotoxicity_replication-package.zip microplastic-neurotoxicity-paper && cd ..
+          sha256sum microplastic-neurotoxicity_manuscript.docx microplastic-neurotoxicity_manuscript.html microplastic-neurotoxicity_replication-package.zip > checksums.sha256
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: manuscript-builds
+          name: manuscript-package
           path: |
-            *.docx
-            index.html
+            microplastic-neurotoxicity_manuscript.docx
+            microplastic-neurotoxicity_manuscript.html
+            microplastic-neurotoxicity_replication-package.zip
+            checksums.sha256
           if-no-files-found: error
 
       - name: Prepare Web Distribution
@@ -82,10 +101,14 @@ jobs:
             Automated build of the latest manuscript from branch `main`.
 
             Direct 1-Click Downloads:
-            * Word Document (.docx): [microplastic-neurotoxicity_manuscript.docx](https://github.com/ht2905/microplastic-neurotoxicity-paper/releases/latest/download/microplastic-neurotoxicity_manuscript.docx)
-            * Standalone HTML (.html): [index.html](https://github.com/ht2905/microplastic-neurotoxicity-paper/releases/latest/download/index.html)
+            * **Word Document (.docx):** [microplastic-neurotoxicity_manuscript.docx](https://github.com/ht2905/microplastic-neurotoxicity-paper/releases/latest/download/microplastic-neurotoxicity_manuscript.docx)
+            * **Standalone HTML (.html):** [microplastic-neurotoxicity_manuscript.html](https://github.com/ht2905/microplastic-neurotoxicity-paper/releases/latest/download/microplastic-neurotoxicity_manuscript.html)
+            * **Complete Replication Package (.zip):** [microplastic-neurotoxicity_replication-package.zip](https://github.com/ht2905/microplastic-neurotoxicity-paper/releases/latest/download/microplastic-neurotoxicity_replication-package.zip)
+            * **Integrity Checksums (SHA-256):** [checksums.sha256](https://github.com/ht2905/microplastic-neurotoxicity-paper/releases/latest/download/checksums.sha256)
           files: |
             microplastic-neurotoxicity_manuscript.docx
-            index.html
+            microplastic-neurotoxicity_manuscript.html
+            microplastic-neurotoxicity_replication-package.zip
+            checksums.sha256
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
