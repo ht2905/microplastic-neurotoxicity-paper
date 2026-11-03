@@ -1,15 +1,16 @@
-name: Render Manuscript
+name: Render and Release Manuscript
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
-  build:
+  build-and-release:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -17,12 +18,52 @@ jobs:
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
-      - name: Render Manuscript
+      - name: Render Manuscript to Word (DOCX)
         run: quarto render microplastic-neurotoxicity_manuscript.qmd --to hikmah-manuscript-docx
 
-      - name: Upload Compiled Document
+      - name: Render Manuscript to Standalone HTML
+        run: quarto render microplastic-neurotoxicity_manuscript.qmd --to html --output index.html
+
+      - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: microplastic-neurotoxicity-manuscript
-          path: "*.docx"
+          name: manuscript-builds
+          path: |
+            *.docx
+            index.html
           if-no-files-found: error
+
+      - name: Prepare Web Distribution
+        run: |
+          mkdir -p dist
+          cp index.html dist/index.html
+          cp -r figures dist/figures
+
+      - name: Deploy to GitHub Pages Branch
+        uses: peaceiris/actions-gh-pages@v4
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
+          force_orphan: true
+
+      - name: Publish Direct-Download Release
+        uses: softprops/action-gh-release@v2
+        if: github.ref == 'refs/heads/main'
+        with:
+          tag_name: latest
+          name: "Latest Manuscript Build"
+          draft: false
+          prerelease: false
+          body: |
+            Automated build of the latest manuscript from branch `main`.
+
+            Direct 1-Click Downloads:
+            * Word Document (.docx): [microplastic-neurotoxicity_manuscript.docx](https://github.com/ht2905/microplastic-neurotoxicity-paper/releases/latest/download/microplastic-neurotoxicity_manuscript.docx)
+            * Standalone HTML (.html): [index.html](https://github.com/ht2905/microplastic-neurotoxicity-paper/releases/latest/download/index.html)
+          files: |
+            microplastic-neurotoxicity_manuscript.docx
+            index.html
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

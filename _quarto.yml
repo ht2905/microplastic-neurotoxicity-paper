@@ -8,3 +8,9 @@ editor: source
 format:
   hikmah-manuscript-docx:
     toc: false
+  html:
+    toc: true
+    toc-depth: 3
+    theme: cosmo
+    embed-resources: true
+    standalone: true

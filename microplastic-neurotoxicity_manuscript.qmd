@@ -4,6 +4,12 @@ title: "Micro- and Nanoplastics: Crossing the Blood-Brain Barrier to Drive Susta
 format:
   hikmah-manuscript-docx:
     toc: false
+  html:
+    toc: true
+    toc-depth: 3
+    theme: cosmo
+    embed-resources: true
+    standalone: true
 
 date: last-modified
 date-format: MM-DD-YYYY
