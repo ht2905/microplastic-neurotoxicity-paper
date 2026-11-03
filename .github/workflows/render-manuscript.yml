@@ -1,0 +1,28 @@
+name: Render Manuscript
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Render Manuscript
+        run: quarto render microplastic-neurotoxicity_manuscript.qmd --to hikmah-manuscript-docx
+
+      - name: Upload Compiled Document
+        uses: actions/upload-artifact@v4
+        with:
+          name: microplastic-neurotoxicity-manuscript
+          path: "*.docx"
+          if-no-files-found: error
