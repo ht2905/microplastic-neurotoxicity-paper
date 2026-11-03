@@ -1,146 +1,144 @@
 # Micro- and Nanoplastics: Crossing the Blood-Brain Barrier to Drive Sustained Neuroinflammation and HPA Axis Dysregulation
 
-This repository hosts the manuscript source, bibliography database, visual figures, and publishing configuration for an academic review on the neurotoxic and endocrine effects of environmental micro- and nanoplastics (MNPs). The paper was prepared for the Immunology course (BT335IU) at the School of Biotechnology, International University – Vietnam National University, Ho Chi Minh City.
+This repository contains the manuscript, reference database, and publishing pipeline for an academic review examining how environmental micro- and nanoplastics (MNPs) penetrate the Central Nervous System (CNS) and disrupt endocrine homeostasis.
 
-The manuscript is authored in Quarto Markdown (`microplastic-neurotoxicity_manuscript.qmd`) and compiles to Microsoft Word (`.docx`) using a locally vendored Hikmah Academic manuscript template and Elsevier Vancouver citation formatting.
+The project was authored for the Immunology (BT335IU) course at the School of Biotechnology, International University – Vietnam National University, Ho Chi Minh City.
 
 ---
 
-## Quick Access for Readers
+## Direct Access for Readers
 
-The manuscript can be read in plain-text directly on GitHub, downloaded as a pre-compiled document via GitHub Actions artifacts, or compiled locally with a single command.
+You do not need to install Git, R, Python, or Quarto to read this manuscript. The repository automatically compiles and publishes the latest version through GitHub Actions.
 
-| Access Method | Description | Target Format |
+| Format | Access Link | Description |
 |:---|:---|:---|
-| **Direct Download (GitHub Actions)** | Download the latest compiled Word document directly from the repository's GitHub Actions build artifacts. | Word document (`.docx`) |
-| **Local Render (1-Command)** | Run `quarto render microplastic-neurotoxicity_manuscript.qmd` on your machine. | Word document (`.docx`) |
-| **Read Source Markdown** | Open `microplastic-neurotoxicity_manuscript.qmd` in any text editor, Obsidian, or directly in GitHub. | Plain-text Markdown (`.qmd`) |
+| **Web Article (In-Browser)** | [Read Online via GitHub Pages](https://ht2905.github.io/microplastic-neurotoxicity-paper/) | Formatted interactive article with floating table of contents and high-resolution figures. Accessible on any browser or mobile device. |
+| **Microsoft Word (.docx)** | [Direct Download Latest DOCX](https://github.com/ht2905/microplastic-neurotoxicity-paper/releases/latest/download/microplastic-neurotoxicity_manuscript.docx) | Fully styled Word document with Vancouver numbered citations and embedded figures. Ideal for track changes, reviewing, and offline reading. |
+| **Standalone HTML (.html)** | [Direct Download Standalone HTML](https://github.com/ht2905/microplastic-neurotoxicity-paper/releases/latest/download/index.html) | Single self-contained HTML file with all figures and styles embedded. Can be saved locally and opened offline without Word. |
+| **Plain-Text Source (.qmd)** | [Read Source on GitHub](microplastic-neurotoxicity_manuscript.qmd) | Raw Quarto Markdown source file containing text, academic metadata, and citation keys. |
 
 ---
 
 ## Manuscript Overview
 
-### Academic Context
+### Academic Metadata
 
-| Detail | Description |
+| Property | Details |
 |:---|:---|
 | Title | Micro- and Nanoplastics: Crossing the Blood-Brain Barrier to Drive Sustained Neuroinflammation and HPA Axis Dysregulation |
-| Course | Immunology (BT335IU) |
-| Institution | School of Biotechnology, International University – VNU-HCM |
 | Author | Tran Quoc Hoang (Student ID: BTBTWE24036) |
+| Institution | School of Biotechnology, International University – Vietnam National University, Ho Chi Minh City |
+| Course | Immunology (BT335IU) |
 | Academic Advisor | Assoc. Prof. Hoai T. T. Nguyen |
 | Date | December 2025 |
-| Keywords | Microplastic, Nanoplastic, Neuroinflammation, Microglia, Gut-Brain Axis, HPA Axis |
+| Keywords | Microplastics, Nanoplastics, Blood-Brain Barrier, Neuroinflammation, Microglia, NLRP3 Inflammasome, Gut-Brain Axis, HPA Axis |
 
 ### Abstract Summary
 
-Micro- and nanoplastics (MNPs) represent pervasive environmental pollutants that enter mammalian organisms via inhalation and ingestion. Due to their nanoscale size, nanoplastics can cross biological membranes, notably the Blood-Brain Barrier (BBB), through endocytic pathways and the "Trojan Horse" mechanism. 
+Micro- and nanoplastics (MNPs) represent pervasive environmental contaminants that enter mammalian organisms via inhalation and ingestion. Due to their diminutive nanoscale dimensions, nanoplastics can traverse biological barriers—most critically the Blood-Brain Barrier (BBB)—through endocytic pathways and the "Trojan Horse" transport mechanism mediated by circulating immune cells.
 
-Inside the central nervous system, non-degradable particles induce persistent microglial activation through frustrated phagocytosis, which triggers the NLRP3 inflammasome cascade and the sustained release of pro-inflammatory cytokines (IL-1beta, IL-18, TNF-alpha). In parallel, peripheral gut exposure stimulates gut-brain axis signaling and systemic inflammation. Together, these processes drive Hypothalamic-Pituitary-Adrenal (HPA) axis dysregulation, elevated baseline glucocorticoids, anxiety-like behaviors, and cognitive deficits.
+Once inside the brain parenchyma, non-degradable particles induce persistent microglial activation via frustrated phagocytosis. This failure to digest foreign synthetic debris triggers the NLRP3 inflammasome cascade, driving chronic cleavage of caspase-1 and sustained secretion of potent pro-inflammatory cytokines (IL-1beta, IL-18, TNF-alpha). 
 
-### Mechanistic Pathway
+Concurrently, peripheral gut exposure damages mucosal tight junctions, permitting systemic leakage of bacterial endotoxins and inflammatory mediators via the Gut-Brain Axis (GBA). Together, central and peripheral immune insults induce neurotoxicity, chronic Hypothalamic-Pituitary-Adrenal (HPA) axis dysregulation, glucocorticoid receptor resistance, heightened baseline anxiety-like behaviors, and cognitive deficits.
+
+### Mechanistic Summary
 
 ```mermaid
 flowchart TD
-    Exposure["Environmental MNP Exposure\n(Ingestion and Inhalation)"] --> Entry["Systemic Uptake and\nGut-Brain Axis Disruption"]
-    Entry --> BBB["Translocation Across the\nBlood-Brain Barrier"]
-    BBB --> Microglia["Microglial Uptake and\nFrustrated Phagocytosis"]
-    Microglia --> NLRP3["NLRP3 Inflammasome\nCascade Activation"]
-    NLRP3 --> Cytokines["Sustained Release of\nPro-inflammatory Cytokines\n(IL-1beta, IL-18, TNF-alpha)"]
-    Cytokines --> Pathology["HPA Axis Dysregulation,\nCognitive Impairment, and\nAnxiety-Like Behaviors"]
+    Exposure["Environmental MNP Exposure\n(Ingestion and Inhalation)"] --> Uptake["Systemic Translocation &\nGut Mucosal Barrier Breakdown"]
+    Uptake --> GBA["Gut-Brain Axis Signaling\n(Endotoxin Leakage & Cytokine Storm)"]
+    Uptake --> BBB["Translocation Across the BBB\n(Endocytosis & Trojan Horse Effect)"]
+    BBB --> Microglia["Microglial Uptake &\nFrustrated Phagocytosis"]
+    Microglia --> NLRP3["NLRP3 Inflammasome\nCascade Assembly"]
+    NLRP3 --> Cytokines["Sustained Pro-inflammatory Cytokines\n(IL-1beta, IL-18, TNF-alpha)"]
+    GBA --> Cytokines
+    Cytokines --> Pathology["Chronic HPA Axis Dysregulation,\nGlucocorticoid Resistance, &\nNeurobehavioral Deficits"]
 ```
 
-### Key Sections
-
-| Section | Focus and Scope |
-|:---|:---|
-| 1. Introduction | Global plastic contamination, physical classification (micro vs. nano), and physiological entry points. |
-| 2. MP Transport & BBB Crossing | Structural biology of the BBB, passive vs. active translocation, corona formation, and associated chemical plasticizers. |
-| 3. Microglial Activation & Neuroinflammation | Immune surveillance in the CNS, frustrated phagocytosis mechanisms, and NLRP3 inflammasome assembly. |
-| 4. Gut-Brain Axis & Indirect Effects | Vagus nerve signaling, gut dysbiosis, systemic inflammatory mediators entering through compromised barriers. |
-| 5. Functional Consequences & HPA Disruption | Behavioral alterations, chronic HPA axis hyperactivation, and endocrine feedback disruption. |
-| 6. Treatment & Prevention | Environmental remediation, policy frameworks, and biomedical strategies (such as brain-permeable NLRP3 inhibitors). |
-| 7. Conclusion & Future Directions | Knowledge gaps in human chronic low-dose exposure and priorities for translational research. |
-
 ---
 
-## Repository Structure
+## Figure Guide and Biological Context
 
-| File or Folder | Purpose | Notes |
+The manuscript incorporates four core diagrams illustrating distinct stages of MNP-induced pathology. All visual assets are stored in the [`figures/`](figures/) directory:
+
+| Figure | Filename | Biological Focus |
 |:---|:---|:---|
-| `microplastic-neurotoxicity_manuscript.qmd` | Main manuscript source file | Self-contained Quarto Markdown file containing text, academic metadata, and figure references. |
-| `bibliography.bib` | Reference database | BibTeX file containing all cited literature entries. |
-| `csl/elsevier-vancouver.csl` | Citation stylesheet | Formats references according to Elsevier Vancouver specifications. |
-| `figures/` | Visual figure assets | High-resolution diagrams illustrating BBB crossing, microglial activation, and HPA axis disruption. |
-| `_extensions/andrewheiss/hikmah-manuscript/` | Bundled Quarto template | Locally vendored Hikmah Academic Word manuscript styling extension. |
-| `_quarto.yml` | Project configuration | Defines project-level render targets and default formatting. |
-| `.github/workflows/render-manuscript.yml` | Continuous integration | Automated GitHub Action that compiles the manuscript on push. |
+| **Fig. 1** | [`figures/mnp_entry-routes.jpeg`](figures/mnp_entry-routes.jpeg) | Primary exposure pathways (inhalation and ingestion), SPI polymer classifications, and physical transport across vascular endothelium into the CNS. |
+| **Fig. 2** | [`figures/microglia_activation-states.jpg`](figures/microglia_activation-states.jpg) | Morphological and functional transitions of quiescent microglia into Disease-Associated Microglia (DAMs) and Injury-Responsive Microglia (IRMs). |
+| **Fig. 3** | [`figures/gut-brain-axis_inflammatory-pathways.jpg`](figures/gut-brain-axis_inflammatory-pathways.jpg) | Intestinal invasion, epithelial barrier breakdown, systemic oxidative stress pathways, and peripheral-to-central cytokine transmission. |
+| **Fig. 4** | [`figures/hpa-axis_acute-chronic-dysregulation.png`](figures/hpa-axis_acute-chronic-dysregulation.png) | Comparison of protective acute cortisol feedback loops versus chronic glucocorticoid receptor resistance and HPA axis exhaustion. |
 
 ---
 
-## Reproducing or Editing the Document
+## Biomedical Abbreviations Reference
 
-The repository is optimized for zero-dependency native Quarto compilation. Because the manuscript contains no embedded computational code chunks or statistical simulations, **no R, Python, or package manager installation is required.**
-
-### Prerequisites
-
-| Tool | Recommended Version | Purpose | Download |
-|:---|:---|:---|:---|
-| Quarto CLI | 1.3 or newer | Scientific publishing engine | [quarto.org/docs/get-started](https://quarto.org/docs/get-started/) |
-| Microsoft Word or LibreOffice | Any modern release | Reviewing and viewing the compiled `.docx` | [libreoffice.org](https://www.libreoffice.org/) |
-| Git (Optional) | Any modern release | Cloning the repository | [git-scm.com](https://git-scm.com/) |
-
-> [!NOTE]
-> You do **not** need R, RStudio, `renv`, or a LaTeX distribution (such as MacTeX or MikTeX) to compile this paper. Quarto compiles the `.qmd` source directly to `.docx` via its embedded Pandoc engine.
-
----
-
-### Step-by-Step Local Compilation
-
-1. **Clone or Download the Repository**
-    * Clone via Git:
-      ```bash
-      git clone https://github.com/ht2905/microplastic-neurotoxicity-paper.git
-      cd microplastic-neurotoxicity-paper
-      ```
-    * Alternatively, download and extract the repository ZIP from GitHub.
-
-2. **Render the Manuscript**
-    * Open your terminal in the repository folder and run:
-      ```bash
-      quarto render
-      ```
-    * Or specify the manuscript file directly:
-      ```bash
-      quarto render microplastic-neurotoxicity_manuscript.qmd
-      ```
-    * Quarto will process the markdown text, resolve the citations against `bibliography.bib`, apply the CSL style, and generate `microplastic-neurotoxicity_manuscript.docx`.
-
-3. **Rendering within RStudio or VS Code (GUI Option)**
-    * If you prefer using RStudio or VS Code, simply open `microplastic-neurotoxicity_manuscript.qmd` and click the **Render** button in the top toolbar.
-
----
-
-## Troubleshooting Guide for Wet-Lab Scientists
-
-| Issue | Cause | Solution |
+| Abbreviation | Full Scientific Term | Physiological Context |
 |:---|:---|:---|
-| `quarto: command not found` | Quarto CLI is not installed or not added to your system PATH. | Download and run the Quarto installer from [quarto.org](https://quarto.org/docs/get-started/). Restart your terminal or editor after installing. |
-| Permission error when running `quarto render` | The generated `.docx` file is currently open in Microsoft Word. | Close Microsoft Word before running the render command so that the output file can be overwritten. |
-| Figures fail to render in document | Image path mismatch or missing figure assets. | Confirm that the figure files exist in `figures/` with their expected names (`mnp_entry-routes.jpeg`, `microglia_activation-states.jpg`, etc.). |
-| Extension not recognized | Rendering from a subfolder rather than root. | Always run `quarto render` from the root directory of the repository where `_extensions/` and `_quarto.yml` reside. |
+| **BBB** | Blood-Brain Barrier | Selective endothelial barrier protecting the brain microenvironment. |
+| **CNS** | Central Nervous System | Brain and spinal cord neural networks. |
+| **DAMs** | Disease-Associated Microglia | Specialized neurodegenerative microglial activation phenotype. |
+| **GBA** | Gut-Brain Axis | Bidirectional biochemical signaling between the GI tract and CNS. |
+| **HPA** | Hypothalamic-Pituitary-Adrenal Axis | Primary neuroendocrine stress and immune regulation system. |
+| **IL-1beta** | Interleukin-1 beta | Key pro-inflammatory cytokine matured by the NLRP3 inflammasome. |
+| **IL-6** | Interleukin-6 | Pleiotropic cytokine mediating systemic inflammatory responses. |
+| **IL-18** | Interleukin-18 | Inflammasome-activated cytokine stimulating interferon-gamma. |
+| **IRMs** | Injury-Responsive Microglia | Phenotype specialized for acute focal CNS tissue damage. |
+| **MNPs** | Micro- and Nanoplastics | Synthetic polymer particles ranging from sub-micron to 5 mm. |
+| **NLRP3** | NOD-like Receptor Protein 3 | Intracellular sensor forming the inflammasome complex upon lysosomal rupture. |
+| **TNF-alpha** | Tumor Necrosis Factor alpha | Master pro-inflammatory cytokine driving vascular permeability and apoptosis. |
 
 ---
 
-## Competing Interests
+## Automated CI/CD Publishing Pipeline
 
-The author declares no competing financial, personal, or professional interests.
+This repository uses **GitHub Actions** to automate all building and distribution tasks:
+
+```mermaid
+flowchart LR
+    Push["Git Push / Edit on main"] --> Runner["GitHub Actions Runner\n(Ubuntu Linux)"]
+    Runner --> QuartoWord["quarto render --to docx"]
+    Runner --> QuartoHTML["quarto render --to html"]
+    QuartoWord --> Release["GitHub Releases\n(Direct 1-Click DOCX Download)"]
+    QuartoHTML --> Pages["GitHub Pages\n(Live Interactive Web Article)"]
+```
+
+* **Zero Local Build Setup:** Every commit pushed to `main` triggers [`.github/workflows/render-manuscript.yml`](.github/workflows/render-manuscript.yml).
+* **Automatic Release Updates:** The workflow attaches freshly compiled `.docx` and `.html` files to the repository's permanent `latest` release.
+* **Web Hosting:** The HTML version is packaged into the `gh-pages` branch, providing an immediate reading link for anyone on phone, tablet, or desktop.
 
 ---
 
-## Citation and Contact
+## Local Compilation (Optional)
 
-If you use or adapt this manuscript or Quarto structure, please cite:
+If you wish to modify the manuscript text, edit citations, or compile locally:
+
+### Requirements
+* [Quarto CLI](https://quarto.org/docs/get-started/) (version 1.3 or higher).
+* A word processor (Microsoft Word or LibreOffice) or a web browser.
+* *Note: No R, Python, or LaTeX installation is required.*
+
+### Build Commands
+
+```bash
+# 1. Clone repository
+git clone https://github.com/ht2905/microplastic-neurotoxicity-paper.git
+cd microplastic-neurotoxicity-paper
+
+# 2. Render both Word and HTML outputs
+quarto render
+
+# 3. Or render specifically to Word (.docx)
+quarto render microplastic-neurotoxicity_manuscript.qmd --to hikmah-manuscript-docx
+
+# 4. Or render specifically to standalone HTML (.html)
+quarto render microplastic-neurotoxicity_manuscript.qmd --to html --output index.html
+```
+
+---
+
+## Citation and Academic Attribution
+
+If you reference this work or adapt its reproducible structure, please cite:
 
 ```bibtex
 @misc{tran2025microplastics,
