@@ -1,6 +1,6 @@
 # Micro- and Nanoplastics: Crossing the Blood-Brain Barrier to Drive Sustained Neuroinflammation and HPA Axis Dysregulation
 
-This repository contains the manuscript, reference database, and publishing pipeline for an academic review examining how environmental micro- and nanoplastics (MNPs) penetrate the Central Nervous System (CNS) and disrupt endocrine homeostasis.
+This repository contains the manuscript, reference database, and automated publishing pipeline for an academic review examining how environmental micro- and nanoplastics (MNPs) penetrate the Central Nervous System (CNS) and disrupt endocrine homeostasis.
 
 The project was authored for the Immunology (BT335IU) course at the School of Biotechnology, International University – Vietnam National University, Ho Chi Minh City.
 
@@ -8,13 +8,15 @@ The project was authored for the Immunology (BT335IU) course at the School of Bi
 
 ## Direct Access for Readers
 
-You do not need to install Git, R, Python, or Quarto to read this manuscript. The repository automatically compiles and publishes the latest version through GitHub Actions.
+You do not need to install Git, R, Python, or Quarto to read or review this manuscript. The repository automatically compiles, packages, and publishes the latest version through GitHub Actions.
 
 | Format | Access Link | Description |
 |:---|:---|:---|
 | **Web Article (In-Browser)** | [Read Online via GitHub Pages](https://ht2905.github.io/microplastic-neurotoxicity-paper/) | Formatted interactive article with floating table of contents and high-resolution figures. Accessible on any browser or mobile device. |
-| **Microsoft Word (.docx)** | [Direct Download Latest DOCX](https://github.com/ht2905/microplastic-neurotoxicity-paper/releases/latest/download/microplastic-neurotoxicity_manuscript.docx) | Fully styled Word document with Vancouver numbered citations and embedded figures. Ideal for track changes, reviewing, and offline reading. |
-| **Standalone HTML (.html)** | [Direct Download Standalone HTML](https://github.com/ht2905/microplastic-neurotoxicity-paper/releases/latest/download/index.html) | Single self-contained HTML file with all figures and styles embedded. Can be saved locally and opened offline without Word. |
+| **Microsoft Word (.docx)** | [Direct Download Latest DOCX](https://github.com/ht2905/microplastic-neurotoxicity-paper/releases/latest/download/microplastic-neurotoxicity_manuscript.docx) | Fully styled Word document with Vancouver numbered citations and embedded figures. Ideal for track changes, reviewing, and grading. |
+| **Standalone HTML (.html)** | [Direct Download Standalone HTML](https://github.com/ht2905/microplastic-neurotoxicity-paper/releases/latest/download/microplastic-neurotoxicity_manuscript.html) | Single self-contained HTML file with all figures and styles embedded. Can be saved locally and opened offline without Word. |
+| **Complete Replication Package (.zip)** | [Download Replication Package (.zip)](https://github.com/ht2905/microplastic-neurotoxicity-paper/releases/latest/download/microplastic-neurotoxicity_replication-package.zip) | Complete self-contained research compendium containing the compiled Word manuscript, offline HTML, raw Quarto Markdown source, BibTeX bibliography, figures, and CSL styles. |
+| **Verification Checksums** | [Download SHA-256 Checksums](https://github.com/ht2905/microplastic-neurotoxicity-paper/releases/latest/download/checksums.sha256) | Cryptographic SHA-256 hashes to verify release package and file integrity. |
 | **Plain-Text Source (.qmd)** | [Read Source on GitHub](microplastic-neurotoxicity_manuscript.qmd) | Raw Quarto Markdown source file containing text, academic metadata, and citation keys. |
 
 ---
@@ -89,22 +91,28 @@ The manuscript incorporates four core diagrams illustrating distinct stages of M
 
 ---
 
-## Automated CI/CD Publishing Pipeline
+## Automated CI/CD Publishing & Packaging Pipeline
 
-This repository uses **GitHub Actions** to automate all building and distribution tasks:
+This repository uses **GitHub Actions** to automate all building, release packaging, and distribution tasks on every push:
 
 ```mermaid
 flowchart LR
-    Push["Git Push / Edit on main"] --> Runner["GitHub Actions Runner\n(Ubuntu Linux)"]
-    Runner --> QuartoWord["quarto render --to docx"]
-    Runner --> QuartoHTML["quarto render --to html"]
-    QuartoWord --> Release["GitHub Releases\n(Direct 1-Click DOCX Download)"]
+    Push["Git Push / Edit on main"] --> Runner["GitHub Actions Cloud Runner\n(Ubuntu Linux)"]
+    Runner --> QuartoWord["Render DOCX\n(hikmah-manuscript-docx)"]
+    Runner --> QuartoHTML["Render HTML\n(Standalone index.html)"]
+    QuartoWord --> Compendium["Package Compendium\n(DOCX + HTML + Source + Bib + Figures)"]
+    QuartoHTML --> Compendium
+    Compendium --> Hashes["Generate SHA-256 Checksums"]
+    Hashes --> Release["GitHub Releases\n(DOCX, HTML, Package ZIP, SHA-256)"]
     QuartoHTML --> Pages["GitHub Pages\n(Live Interactive Web Article)"]
 ```
 
-* **Zero Local Build Setup:** Every commit pushed to `main` triggers [`.github/workflows/render-manuscript.yml`](.github/workflows/render-manuscript.yml).
-* **Automatic Release Updates:** The workflow attaches freshly compiled `.docx` and `.html` files to the repository's permanent `latest` release.
-* **Web Hosting:** The HTML version is packaged into the `gh-pages` branch, providing an immediate reading link for anyone on phone, tablet, or desktop.
+### What the Pipeline Produces
+
+1. **Individual Word Document (`.docx`)**: Dedicated for reviewers and co-authors needing track changes or commenting in Microsoft Word.
+2. **Interactive Web Article (`index.html`)**: Hosted live at [`https://ht2905.github.io/microplastic-neurotoxicity-paper/`](https://ht2905.github.io/microplastic-neurotoxicity-paper/) for direct browser reading on any desktop or mobile device.
+3. **Complete Replication Package (`.zip`)**: A self-contained research compendium containing the compiled manuscript, offline HTML, raw Quarto Markdown source, high-resolution figures, CSL citation stylesheets, and BibTeX database.
+4. **Integrity Checksums (`checksums.sha256`)**: SHA-256 cryptographic hashes for long-term archival integrity.
 
 ---
 
