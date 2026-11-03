@@ -7,10 +7,19 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -38,6 +47,7 @@ jobs:
           mkdir -p dist
           cp index.html dist/index.html
           cp -r figures dist/figures
+          touch dist/.nojekyll
 
       - name: Deploy to GitHub Pages Branch
         uses: peaceiris/actions-gh-pages@v4
@@ -47,6 +57,18 @@ jobs:
           publish_dir: ./dist
           publish_branch: gh-pages
           force_orphan: true
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          path: ./dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        if: github.ref == 'refs/heads/main'
+        continue-on-error: true
 
       - name: Publish Direct-Download Release
         uses: softprops/action-gh-release@v2
