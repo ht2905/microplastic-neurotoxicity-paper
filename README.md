@@ -8,7 +8,7 @@ The project was authored for the Immunology (BT335IU) course at the School of Bi
 
 ## Direct Access for Readers
 
-You do not need to install Git, R, Python, or Quarto to read or review this manuscript. The repository automatically compiles, packages, and publishes the latest version through GitHub Actions.
+You do not need to install Git, R, Python, or Quarto to read or review this manuscript. Pre-compiled documents, the interactive web preview, and the complete replication bundle are available directly below.
 
 | Format | Access Link | Description |
 |:---|:---|:---|
@@ -88,31 +88,6 @@ The manuscript incorporates four core diagrams illustrating distinct stages of M
 | **MNPs** | Micro- and Nanoplastics | Synthetic polymer particles ranging from sub-micron to 5 mm. |
 | **NLRP3** | NOD-like Receptor Protein 3 | Intracellular sensor forming the inflammasome complex upon lysosomal rupture. |
 | **TNF-alpha** | Tumor Necrosis Factor alpha | Master pro-inflammatory cytokine driving vascular permeability and apoptosis. |
-
----
-
-## Automated CI/CD Publishing & Packaging Pipeline
-
-This repository uses **GitHub Actions** to automate all building, release packaging, and distribution tasks on every push:
-
-```mermaid
-flowchart LR
-    Push["Git Push / Edit on main"] --> Runner["GitHub Actions Cloud Runner\n(Ubuntu Linux)"]
-    Runner --> QuartoWord["Render DOCX\n(hikmah-manuscript-docx)"]
-    Runner --> QuartoHTML["Render HTML\n(Standalone index.html)"]
-    QuartoWord --> Compendium["Package Compendium\n(DOCX + HTML + Source + Bib + Figures)"]
-    QuartoHTML --> Compendium
-    Compendium --> Hashes["Generate SHA-256 Checksums"]
-    Hashes --> Release["GitHub Releases\n(DOCX, HTML, Package ZIP, SHA-256)"]
-    QuartoHTML --> Pages["GitHub Pages\n(Live Interactive Web Article)"]
-```
-
-### What the Pipeline Produces
-
-1. **Individual Word Document (`.docx`)**: Dedicated for reviewers and co-authors needing track changes or commenting in Microsoft Word.
-2. **Interactive Web Article (`index.html`)**: Hosted live at [`https://ht2905.github.io/microplastic-neurotoxicity-paper/`](https://ht2905.github.io/microplastic-neurotoxicity-paper/) for direct browser reading on any desktop or mobile device.
-3. **Complete Replication Package (`.zip`)**: A self-contained research compendium containing the compiled manuscript, offline HTML, raw Quarto Markdown source, high-resolution figures, CSL citation stylesheets, and BibTeX database.
-4. **Integrity Checksums (`checksums.sha256`)**: SHA-256 cryptographic hashes for long-term archival integrity.
 
 ---
 
